@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xj.sample.mapper.GmapnetcacheMapper">
+   <resultMap type="com.xj.sample.entity.Gmapnetcache" id="getClassMap">
+		<result column="Type" property="type" jdbcType="INTEGER" />
+		<result column="Zoom" property="zoom" jdbcType="INTEGER" />
+		<result column="X" property="x" jdbcType="INTEGER" />
+		<result column="Y" property="y" jdbcType="INTEGER" />
+		<result column="Tile" property="tile" jdbcType="LONGBLOB" />
+	</resultMap>
+	<select id="getGmapnetcache" resultMap="getClassMap"> 
+		select gmapnetcache.*
+		from gmapnetcache
+		where gmapnetcache.id=#{id}
+	</select>
+	
+	
+	<select id="listGmapnetcache" resultMap="getClassMap"> 
+		select gmapnetcache.*
+		from gmapnetcache
+		where 1=1
+		<if test="keyword !=null and keyword !=''">
+		and (
+					gmapnetcache.Type like concat(concat('%',#{keyword}),'%') or 
+					gmapnetcache.Zoom like concat(concat('%',#{keyword}),'%') or 
+					gmapnetcache.X like concat(concat('%',#{keyword}),'%') or 
+					gmapnetcache.Y like concat(concat('%',#{keyword}),'%') or 
+					gmapnetcache.Tile like concat(concat('%',#{keyword}),'%') or 
+			gmapnetcache.remark like concat(concat('%',#{keyword}),'%'))
+		</if>
+		limit #{pageNumber},#{pageSize}
+	</select>
+	
+	
+	<select id="getTotal" resultType="java.lang.Integer">
+		select count(*)
+		from gmapnetcache
+		where 1=1
+		<if test="keyword !=null and keyword !=''">
+		and (
+					gmapnetcache.Type like concat(concat('%',#{keyword}),'%') or 
+					gmapnetcache.Zoom like concat(concat('%',#{keyword}),'%') or 
+					gmapnetcache.X like concat(concat('%',#{keyword}),'%') or 
+					gmapnetcache.Y like concat(concat('%',#{keyword}),'%') or 
+					gmapnetcache.Tile like concat(concat('%',#{keyword}),'%') or 
+			gmapnetcache.remark like concat(concat('%',#{keyword}),'%'))
+		</if>
+	</select>
+</mapper>

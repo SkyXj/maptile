@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xj.sample.mapper.AnnotationMapper">
+   <resultMap type="com.xj.sample.entity.Annotation" id="getClassMap">
+		<result column="Type" property="type" jdbcType="INTEGER" />
+		<result column="Zoom" property="zoom" jdbcType="INTEGER" />
+		<result column="X" property="x" jdbcType="INTEGER" />
+		<result column="Y" property="y" jdbcType="INTEGER" />
+		<result column="Tile" property="tile" jdbcType="LONGBLOB" />
+	</resultMap>
+	<select id="getAnnotation" resultMap="getClassMap"> 
+		select annotation.*
+		from annotation
+		where annotation.id=#{id}
+	</select>
+	
+	
+	<select id="listAnnotation" resultMap="getClassMap"> 
+		select annotation.*
+		from annotation
+		where 1=1
+		<if test="keyword !=null and keyword !=''">
+		and (
+					annotation.Type like concat(concat('%',#{keyword}),'%') or 
+					annotation.Zoom like concat(concat('%',#{keyword}),'%') or 
+					annotation.X like concat(concat('%',#{keyword}),'%') or 
+					annotation.Y like concat(concat('%',#{keyword}),'%') or 
+					annotation.Tile like concat(concat('%',#{keyword}),'%') or 
+			annotation.remark like concat(concat('%',#{keyword}),'%'))
+		</if>
+		limit #{pageNumber},#{pageSize}
+	</select>
+	
+	
+	<select id="getTotal" resultType="java.lang.Integer">
+		select count(*)
+		from annotation
+		where 1=1
+		<if test="keyword !=null and keyword !=''">
+		and (
+					annotation.Type like concat(concat('%',#{keyword}),'%') or 
+					annotation.Zoom like concat(concat('%',#{keyword}),'%') or 
+					annotation.X like concat(concat('%',#{keyword}),'%') or 
+					annotation.Y like concat(concat('%',#{keyword}),'%') or 
+					annotation.Tile like concat(concat('%',#{keyword}),'%') or 
+			annotation.remark like concat(concat('%',#{keyword}),'%'))
+		</if>
+	</select>
+</mapper>

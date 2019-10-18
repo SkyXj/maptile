@@ -1,0 +1,11 @@
+server:
+  port: 8989
+#mybatis plus 设置
+mybatis-plus:
+  mapper-locations: classpath*:com/xj/web/code/generation/mapper/xml/*Mapper.xml
+  typeAliasesPackage: com.xj.web.code.generation.entity
+
+example:
+   service:
+     enabled: true
+     config: abc-des-dde,SSS-DRS-RE,SDR-SDFR-XXX 
