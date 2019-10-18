@@ -75,6 +75,7 @@ public class HttpUtils {
      * @throws IOException 程序异常时抛出，由调用者处理
      */
     public static Response get(String url, Map<String, String> headers) throws IOException {
+		system.out.printlf(url);
         if (null == url || url.isEmpty()) {
             throw new RuntimeException("The request URL is blank.");
         }
