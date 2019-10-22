@@ -14,11 +14,9 @@
 package com.xj.sample.service;
 
 
-import com.xj.sample.entity.Map3dtile;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
-
-import java.io.IOException;
+import com.xj.sample.entity.Map3dtile;
 
 /**
 * 描述： 服务实现层接口

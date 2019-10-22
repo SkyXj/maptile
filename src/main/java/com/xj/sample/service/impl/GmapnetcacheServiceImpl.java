@@ -16,19 +16,16 @@ package com.xj.sample.service.impl;
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.xj.sample.entity.Gmapnetcache;
 import com.xj.sample.mapper.GmapnetcacheMapper;
 import com.xj.sample.service.GmapnetcacheService;
+import org.springframework.stereotype.Service;
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-
-import javax.persistence.EntityManager;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.sql.Blob;
-import java.sql.Wrapper;
 
 /**
  * 描述： 服务实现层

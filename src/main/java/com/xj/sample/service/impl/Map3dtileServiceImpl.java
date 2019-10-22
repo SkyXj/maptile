@@ -16,21 +16,17 @@ package com.xj.sample.service.impl;
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.xj.sample.entity.Annotation;
-import com.xj.sample.entity.Gmapnetcache;
-import com.xj.sample.tool.HttpUtils;
-import org.jsoup.Connection;
-import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.xj.sample.entity.Map3dtile;
 import com.xj.sample.mapper.Map3dtileMapper;
 import com.xj.sample.service.Map3dtileService;
-
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.xj.sample.tool.HttpUtils;
+import org.jsoup.Connection;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.ArrayList;

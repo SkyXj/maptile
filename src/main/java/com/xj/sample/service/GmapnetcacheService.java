@@ -14,10 +14,9 @@
 package com.xj.sample.service;
 
 
-import com.xj.sample.entity.Gmapnetcache;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.xj.sample.entity.Gmapnetcache;
 
 /**
 * 描述： 服务实现层接口

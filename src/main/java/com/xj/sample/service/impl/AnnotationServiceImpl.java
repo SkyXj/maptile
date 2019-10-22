@@ -16,7 +16,6 @@ package com.xj.sample.service.impl;
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.xj.sample.entity.Map3dtile;
 import com.xj.sample.tool.HttpUtils;
 import org.jsoup.Connection;
 import org.springframework.stereotype.Service;

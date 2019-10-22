@@ -16,7 +16,6 @@ package com.xj.sample.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import javax.persistence.*;
-import com.common.entity.BaseEntity;
 import lombok.Data;
 
 import java.math.BigDecimal;
