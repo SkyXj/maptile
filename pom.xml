@@ -87,11 +87,11 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 		
-		<dependency>
+		<!--<dependency>
 			<groupId>com.xj.spring.boot</groupId>
 			<artifactId>codegenerate-spring-boot-starter</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency>-->
 
 		<dependency>
 			<groupId>org.jsoup</groupId>
