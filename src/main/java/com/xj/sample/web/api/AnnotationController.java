@@ -18,19 +18,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.common.entity.Response;
-import com.common.entity.ResultCode;
-import com.common.mybatis.baseapi.AbstractController;
 import com.xj.sample.entity.Annotation;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
 import com.xj.sample.service.AnnotationService;
 
-@Api(value="",tags={""})
 @RestController
 @RequestMapping("/annotation")
 @CrossOrigin
-public class AnnotationController extends AbstractController<Annotation>{
+public class AnnotationController{
 	
 	@Autowired
 	AnnotationService annotationService;
@@ -53,32 +48,6 @@ public class AnnotationController extends AbstractController<Annotation>{
 		} catch (Exception e) {
 			// TODO: handle exception
 			return new ResponseEntity<Integer>(HttpStatus.FAILED_DEPENDENCY);
-		}
-	}
-
-
-	
-	@ApiOperation("根据id查找(关联对象)")
-	@RequestMapping(value="/getAnnotation/{id}",method=RequestMethod.GET)
-	public Response getAnnotation(@PathVariable(value="id") long id){
-		try {
-			return result(annotationService.getAnnotation(id));
-		} catch (Exception e) {
-			// TODO: handle exception
-			return result(ResultCode.falied,e.getMessage());
-		}
-	}
-	
-	@ApiOperation("查所有(关联对象)")
-	@RequestMapping(value="/listAnnotation/{pageNumber}/{pageSize}",method=RequestMethod.POST)
-	public Response listAnnotation(@PathVariable(value="pageNumber") Integer pageNumber,
-			@PathVariable(value="pageSize") Integer pageSize,@RequestParam(required=false) String keyword){
-		try {
-			return result(annotationService.listAnnotation(pageNumber,pageSize,keyword));
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return result(ResultCode.falied,e.getMessage());
 		}
 	}
 }

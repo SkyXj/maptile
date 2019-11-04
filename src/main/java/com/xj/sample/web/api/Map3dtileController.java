@@ -18,19 +18,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.common.entity.Response;
-import com.common.entity.ResultCode;
-import com.common.mybatis.baseapi.AbstractController;
 import com.xj.sample.entity.Map3dtile;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import com.xj.sample.service.Map3dtileService;
 
-@Api(value="",tags={""})
+
 @RestController
 @RequestMapping("/map3dtile")
 @CrossOrigin
-public class Map3dtileController extends AbstractController<Map3dtile>{
+public class Map3dtileController{
 	
 	@Autowired
 	Map3dtileService map3dtileService;
@@ -65,29 +60,4 @@ public class Map3dtileController extends AbstractController<Map3dtile>{
 		}
 	}
 
-
-	
-	@ApiOperation("根据id查找(关联对象)")
-	@RequestMapping(value="/getMap3dtile/{id}",method=RequestMethod.GET)
-	public Response getMap3dtile(@PathVariable(value="id") long id){
-		try {
-			return result(map3dtileService.getMap3dtile(id));
-		} catch (Exception e) {
-			// TODO: handle exception
-			return result(ResultCode.falied,e.getMessage());
-		}
-	}
-	
-	@ApiOperation("查所有(关联对象)")
-	@RequestMapping(value="/listMap3dtile/{pageNumber}/{pageSize}",method=RequestMethod.POST)
-	public Response listMap3dtile(@PathVariable(value="pageNumber") Integer pageNumber,
-			@PathVariable(value="pageSize") Integer pageSize,@RequestParam(required=false) String keyword){
-		try {
-			return result(map3dtileService.listMap3dtile(pageNumber,pageSize,keyword));
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return result(ResultCode.falied,e.getMessage());
-		}
-	}
 }
