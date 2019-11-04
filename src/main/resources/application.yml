@@ -1,5 +1,5 @@
 server:
-  port: 8989
+  port: 8957
 #mybatis plus 设置
 mybatis-plus:
   mapper-locations: classpath*:com/xj/web/code/generation/mapper/xml/*Mapper.xml
