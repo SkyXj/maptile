@@ -22,6 +22,7 @@ import com.xj.sample.entity.Map3dtile;
 import com.xj.sample.mapper.Map3dtileMapper;
 import com.xj.sample.service.Map3dtileService;
 import com.xj.sample.tool.HttpUtils;
+import com.xj.sample.tool.IoUtils;
 import org.jsoup.Connection;
 import org.springframework.stereotype.Service;
 
@@ -91,7 +92,7 @@ public class Map3dtileServiceImpl extends ServiceImpl<Map3dtileMapper, Map3dtile
 						String currenturl= MessageFormat.format(url,x+"",y+"",z);
 						Connection.Response response = HttpUtils.get(currenturl);
 						BufferedInputStream bufferedInputStream = response.bodyStream();
-						byte[] bytes = readStream(bufferedInputStream);
+						byte[] bytes = IoUtils.readStream(bufferedInputStream);
 						Map3dtile map3dtile=new Map3dtile();
 						map3dtile.setTile(bytes);
 						map3dtile.setType(40800);
@@ -117,7 +118,7 @@ public class Map3dtileServiceImpl extends ServiceImpl<Map3dtileMapper, Map3dtile
 			String currenturl= MessageFormat.format(url,x+"",y+"",z);
 			Connection.Response response = HttpUtils.get(currenturl);
 			BufferedInputStream bufferedInputStream = response.bodyStream();
-			byte[] bytes = readStream(bufferedInputStream);
+			byte[] bytes = IoUtils.readStream(bufferedInputStream);
 			Map3dtile map3dtile=new Map3dtile();
 			map3dtile.setTile(bytes);
 			map3dtile.setType(type);
@@ -131,17 +132,7 @@ public class Map3dtileServiceImpl extends ServiceImpl<Map3dtileMapper, Map3dtile
 		}
 	}
 
-	public static byte[] readStream(InputStream inStream) throws Exception{
-		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-		byte[] buffer = new byte[1024];
-		int len = -1;
-		while((len = inStream.read(buffer)) != -1){
-			outStream.write(buffer, 0, len);
-		}
-		outStream.close();
-		inStream.close();
-		return outStream.toByteArray();
-	}
+
 
 	@Override
 	public Map3dtile getMap3dtile(long id) {

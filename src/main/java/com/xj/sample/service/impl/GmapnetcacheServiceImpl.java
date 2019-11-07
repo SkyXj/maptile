@@ -21,11 +21,15 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.xj.sample.entity.Gmapnetcache;
 import com.xj.sample.mapper.GmapnetcacheMapper;
 import com.xj.sample.service.GmapnetcacheService;
+import com.xj.sample.tool.HttpUtils;
+import com.xj.sample.tool.IoUtils;
+import org.jsoup.Connection;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.sql.Blob;
+import java.text.MessageFormat;
 
 /**
  * 描述： 服务实现层
@@ -43,12 +47,36 @@ public class GmapnetcacheServiceImpl extends ServiceImpl<GmapnetcacheMapper, Gma
         wrapper.eq("X", x);
         wrapper.eq("Y", y);
         Gmapnetcache gmapnetcache = selectOne(wrapper);
+        byte[] tile=null;
         if (gmapnetcache != null) {
-            byte[] tile = gmapnetcache.getTile();
-//            return blobToBytes(tile);
-            return tile;
+            tile= gmapnetcache.getTile();
+        }else {
+            tile=saveTile(type,x,y,z);
         }
-        return null;
+        return tile;
+    }
+
+    @Override
+    public byte[] saveTile(Integer type, Integer x, Integer y,Integer z) {
+        String url="http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={0}&y={1}&z={2}";
+        String currenturl= MessageFormat.format(url,x+"",y+"",z);
+        Connection.Response response = null;
+        try {
+            response = HttpUtils.get(currenturl);
+            BufferedInputStream bufferedInputStream = response.bodyStream();
+            byte[] bytes = IoUtils.readStream(bufferedInputStream);
+            Gmapnetcache gmapnetcache=new Gmapnetcache();
+            gmapnetcache.setTile(bytes);
+            gmapnetcache.setType(type);
+            gmapnetcache.setX(x);
+            gmapnetcache.setY(y);
+            gmapnetcache.setZoom(z);
+            insert(gmapnetcache);
+            return bytes;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new byte[0];
+        }
     }
 
     @Override

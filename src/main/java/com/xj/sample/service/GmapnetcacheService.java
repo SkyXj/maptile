@@ -27,7 +27,10 @@ public interface GmapnetcacheService extends IService<Gmapnetcache> {
 
 	byte[] getTile(Integer type,Integer z, Integer x, Integer y);
 
+	byte[] saveTile(Integer type,Integer z, Integer x, Integer y);
+
 	Gmapnetcache getGmapnetcache(long id);
 	
 	Page<Gmapnetcache> listGmapnetcache(Integer pageNumber, Integer pageSize,String keyword);
+
 }
