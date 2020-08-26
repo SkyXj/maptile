@@ -23,6 +23,7 @@ import com.xj.sample.mapper.Map3dtileMapper;
 import com.xj.sample.service.Map3dtileService;
 import com.xj.sample.tool.HttpUtils;
 import com.xj.sample.tool.IoUtils;
+import com.xj.sample.utils.MathUtils;
 import org.jsoup.Connection;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,7 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
 * 描述： 服务实现层
@@ -113,9 +115,10 @@ public class Map3dtileServiceImpl extends ServiceImpl<Map3dtileMapper, Map3dtile
 
 	@Override
 	public byte[] save3dTile(Integer type, Integer z, Integer x, Integer y) {
-		String url="http://www.google.cn/maps/vt?lyrs=s%40800&x={0}&y={1}&z={2}";
+//		String url="http://www.google.cn/maps/vt?lyrs=s%40800&x={0}&y={1}&z={2}";
+		String url="http://mt{s}.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali";
 		try {
-			String currenturl= MessageFormat.format(url,x+"",y+"",z);
+			String currenturl= MessageFormat.format(url, MathUtils.getRandom(1, 3),x+"",y+"",z);
 			Connection.Response response = HttpUtils.get(currenturl);
 			BufferedInputStream bufferedInputStream = response.bodyStream();
 			byte[] bytes = IoUtils.readStream(bufferedInputStream);
@@ -131,8 +134,6 @@ public class Map3dtileServiceImpl extends ServiceImpl<Map3dtileMapper, Map3dtile
 			return null;
 		}
 	}
-
-
 
 	@Override
 	public Map3dtile getMap3dtile(long id) {

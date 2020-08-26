@@ -17,6 +17,7 @@ package com.xj.sample.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.xj.sample.tool.HttpUtils;
+import com.xj.sample.utils.MathUtils;
 import org.jsoup.Connection;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -99,7 +100,9 @@ public class AnnotationServiceImpl extends ServiceImpl<AnnotationMapper, Annotat
 
 	@Override
 	public byte[] saveAnnotation(Integer type, Integer z, Integer x, Integer y) {
-		String url="http://t0.tianditu.com/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={0}&TileRow={1}&TileCol={2}&style=default.jpg&tk=319727f59d0d5780a8b984f68c57cd68";
+//		String url="http://t0.tianditu.com/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={0}&TileRow={1}&TileCol={2}&style=default.jpg&tk=319727f59d0d5780a8b984f68c57cd68";
+		String tk="319727f59d0d5780a8b984f68c57cd68";
+		String url="http://t"+MathUtils.getRandom(0,7)+".tianditu.com/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={0}&TileRow={1}&TileCol={2}&style=default.jpg&tk="+tk;
 		String currenturl= MessageFormat.format(url,z,x+"",y+"");
 		try {
 			Connection.Response response = HttpUtils.get(currenturl);
